@@ -1,0 +1,226 @@
+$bg-dark : #111;
+$bg-white : #fff;
+$text-dark : #000;
+$text-white : #fff;
+$text-darkBlue : #11e;
+$font-default : Arial, Helvetica, sans-serif;
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    padding: 0 5rem;
+}
+
+%flex-sequel{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar{
+    background-color: $bg-dark;
+    height: 70px;
+        .container{
+            @extend %flex-sequel;
+            font-family: $font-default;
+            justify-content: space-between;
+            align-items: center;
+            .logo{
+                width: 70px;
+                height: 70px;
+            }
+            .side-menu{
+                @extend %flex-sequel;
+                justify-content: space-evenly;
+                width: 60%;
+                    li{
+                        list-style: none;
+                        a{
+                            text-decoration: none;
+                            color: $text-white;
+                        }
+                        a:hover{
+                            color: $text-darkBlue;
+                        }
+                    }
+            } 
+        }
+}
+
+%anchor{
+    text-decoration: none;
+    color: $text-white;
+    padding: 1rem;
+    margin: 1rem;
+    border: none;
+    border-radius: .5rem;
+}
+
+.banner{
+    background-image: url(../img/banner1.jpg);
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    @extend %flex-sequel;
+        .container{
+            color: $text-white;
+            h3{
+                font-size: 2em;
+            }
+            h3::after{
+                content: '';
+                display: block;
+                border-bottom: 2px solid $text-white;
+                margin: auto;
+                width: 150px;
+                padding-top: .3rem;
+            }
+            p{
+                font-weight: 400;
+            }
+            .btn{
+                margin-top: 3rem;
+            }
+            .btn-primary{
+                font-size: 1.4em;
+                @extend %anchor;
+                background-color: #11e;
+            }
+            .btn-secondary{
+                font-size: 1.4em;
+                @extend %anchor;
+                background-color: #33a;
+            }
+        }
+}
+
+@mixin grid($size,$decoration,$text){
+    grid-column-start: $size;
+    margin-right: 2rem;
+    text-align: $decoration;
+    text-justify: $text;
+}
+
+.about{
+    background-image: linear-gradient(to bottom right, $bg-dark,$bg-dark);
+    @extend %flex-sequel;
+    padding: 1rem;
+        .container{
+            width: 100%;
+                h3{
+                    text-align: center;
+                    color: $text-white;
+                    font-size: 2em;
+                }
+                .grid-section{
+                    color: $text-white;
+                    display: grid;
+                    grid-template-columns: auto auto auto;
+                        .primary{
+                            @include grid(1,justify,inter-word);
+                            @media (max-width:800px) {
+                                text-align: center;
+                                margin: 0;
+                            }
+                        }
+                        .secondary{
+                            @include grid(2,justify,inter-word);
+                            .btn-submit{
+                                background-color: $text-dark;
+                                color: 
+                                $text-white;
+                                padding: .7rem;
+                                font-size: 1.2em;
+                                cursor: pointer;
+                                border: none;
+                                border-radius: .5rem;
+                            }
+                        }
+                        @media (max-width:800px) {
+                            display: flex;
+                            flex-direction: column;
+                        }
+                }   
+        }
+}
+
+.book{
+    font-family: $font-default;
+    background-image: url(../img/banner1.jpg);
+    padding: 2rem 1rem;
+    @extend %flex-sequel;
+        .container{
+            width: 100%;
+            h1{
+                color: $text-white;
+                text-transform: capitalize;
+                font-size: 2em;
+                text-align: center;
+            }
+            .content{
+                display: grid;
+                grid-template-columns: auto auto auto;
+                gap: 5;
+                $content :(
+                    "header-content" : $bg-white,
+                    "main-content" : $bg-white,
+                    "footer-content" : $bg-white
+                );
+                @each $content,$color in $content{
+                    .#{$content}{
+                        width: 90%;
+                        padding: 10px;
+                        margin: auto;
+                        background: $color;
+                            img{
+                                width: 100%;
+                                height: 300px;
+                            }
+                            p{
+                                background: #444343;
+                                color: $text-white;
+                                padding: .5rem;
+                                border-radius: .5rem;
+                            }
+                            .btn{
+                                margin: 2rem 0;
+                            }
+                            a{
+                                @extend %anchor;
+                                background-color: $text-dark;
+                                margin: 0;
+                            }
+                            
+                    }
+                    @media (max-width:800px) {
+                        .#{$content}{
+                            margin: .8rem auto;
+                        }
+                    }
+                }
+                @media (max-width:800px) {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+}
+
+.footer{
+    background-image: linear-gradient(to bottom right, #111, #111);
+    color: $text-white;
+    height: 70px;
+    @extend %flex-sequel;
+    justify-content: center;
+        a{
+            @extend %anchor;
+            color: crimson;
+            margin: 0;
+            padding: 0;
+        }
+}
